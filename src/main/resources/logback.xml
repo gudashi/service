@@ -11,7 +11,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.gudashi.service.controller" level="debug" additivity="false">
+	<logger name="com.gudashi.service" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 

@@ -25,6 +25,20 @@
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
         <property name="maxUploadSize" value="${web.maxUploadSize}" />  
     </bean>
+    
+    <mvc:annotation-driven>
+    <mvc:message-converters register-defaults="true">
+      <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+        <property name="supportedMediaTypes" value="text/html;charset=UTF-8"/>
+        <property name="features">
+          <array>
+            <value>WriteMapNullValue</value>
+            <value>WriteNullStringAsEmpty</value>
+          </array>
+        </property>
+      </bean>
+    </mvc:message-converters>
+  </mvc:annotation-driven>
 
 
 </beans>

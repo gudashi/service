@@ -16,8 +16,7 @@
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
 	<!-- 加载配置属性文件 -->
-	<context:property-placeholder
-		ignore-unresolvable="true" location="classpath*:/gudashi.properties" />
+	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/gudashi.properties" />
 
 	<!-- Mybatis begin -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -36,8 +35,7 @@
 	<!-- Mybatis end -->
 
 	<!-- 配置事务管理器 -->
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 

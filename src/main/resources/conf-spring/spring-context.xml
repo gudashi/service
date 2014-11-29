@@ -54,15 +54,15 @@
 		</bean>
 	</beans>
 	
-	<!-- production 环境 -->
-	<beans profile="production">
+	<!-- demonstration 环境 -->
+	<beans profile="demonstration">
 		<!-- 数据源配置，使用druid数据连接池 -->
 		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 			<property name="driverClassName" value="${jdbc.driver}"/>
 			<!-- 基本属性 url、user、password -->
-			<property name="url" value="${sys.jdbc.url}" />
-			<property name="username" value="${sys.jdbc.username}" />
-			<property name="password" value="${sys.jdbc.password}" />
+			<property name="url" value="jdbc:mysql://${jdbc_host}:${jdbc_port}/${jdbc_database}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true" />
+			<property name="username" value="${jdbc_username}" />
+			<property name="password" value="${jdbc_password}" />
 			
 			<!-- 配置初始化大小、最小、最大 -->
 			<property name="initialSize" value="${jdbc.pool.minIdle}" />

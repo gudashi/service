@@ -60,9 +60,43 @@
 		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
 			<property name="driverClassName" value="${jdbc.driver}"/>
 			<!-- 基本属性 url、user、password -->
-			<property name="url" value="jdbc:mysql://10.4.12.173:3306/d4cb9088c0f474a26b6f14973fa618d4d?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true" />
+			<property name="url" value="${jdbc_url}" />
 			<property name="username" value="${jdbc_username}" />
 			<property name="password" value="${jdbc_password}" />
+			
+			<!-- 配置初始化大小、最小、最大 -->
+			<property name="initialSize" value="${jdbc.pool.minIdle}" />
+			<property name="minIdle" value="${jdbc.pool.minIdle}" /> 
+			<property name="maxActive" value="${jdbc.pool.maxActive}" />
+			
+			<!-- 配置获取连接等待超时的时间 -->
+			<property name="maxWait" value="60000" />
+			
+			<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+			<property name="timeBetweenEvictionRunsMillis" value="60000" />
+			
+			<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+			<property name="minEvictableIdleTimeMillis" value="300000" />
+			
+			<property name="validationQuery" value="SELECT 'x'" />
+			<property name="testWhileIdle" value="true" />
+			<property name="testOnBorrow" value="false" />
+			<property name="testOnReturn" value="false" />
+			
+			<!-- 配置监控统计拦截的filters -->
+		    <property name="filters" value="stat" /> 
+		</bean>
+	</beans>
+	
+	<!-- mopaas 环境 -->
+	<beans profile="mopaas">
+		<!-- 数据源配置，使用druid数据连接池 -->
+		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+			<property name="driverClassName" value="${jdbc.driver}"/>
+			<!-- 基本属性 url、user、password -->
+			<property name="url" value="jdbc:mysql://${MOPAAS_MYSQL16932_HOST}:${MOPAAS_MYSQL16932_PORT}/${MOPAAS_MYSQL16932_NAME}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true" />
+			<property name="username" value="${MOPAAS_MYSQL16932_USERNAME}" />
+			<property name="password" value="${MOPAAS_MYSQL16932_PASSWORD}" />
 			
 			<!-- 配置初始化大小、最小、最大 -->
 			<property name="initialSize" value="${jdbc.pool.minIdle}" />

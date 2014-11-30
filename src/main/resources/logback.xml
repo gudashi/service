@@ -3,16 +3,23 @@
 
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
-
 			<Pattern>
 				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
 			</Pattern>
-
 		</layout>
 	</appender>
 
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>gudashi.log</file>
+		<encoder>
+			<pattern>
+				%date %level [%thread] %logger{10} [%file : %line] %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
 	<logger name="com.gudashi.service" level="debug" additivity="false">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</logger>
 
 	<root level="error">

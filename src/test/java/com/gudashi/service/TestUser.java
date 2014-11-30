@@ -1,5 +1,6 @@
 package com.gudashi.service;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import com.gudashi.service.service.UserService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:conf-spring/spring-context.xml","classpath:conf-spring/spring-context-mybatis.xml"})
 @ActiveProfiles("development") 
+@Ignore
 public class TestUser {
 	
 	private final static Logger logger = LoggerFactory.getLogger(TestUser.class);

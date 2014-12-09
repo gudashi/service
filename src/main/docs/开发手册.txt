@@ -1,0 +1,4 @@
+本地运行：mvn tomcat:run或mvn tomcat7:run
+
+注意本地运行使用的数据源配置文件是spring-context-dev.xml，所以得先装个MySQL
+大家注意把建表语句放到src/main/sql里面

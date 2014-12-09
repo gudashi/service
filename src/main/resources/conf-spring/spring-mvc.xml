@@ -6,46 +6,36 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-	<description>Spring MVC Configuration</description>
-
-	<!-- 加载配置属性文件 -->
-	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/gudashi.properties" />
-
 	<!-- 使用Annotation自动注册Bean,只扫描@Controller -->
 	<context:component-scan base-package="com.gudashi.service" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<!-- 视图文件解析配置 -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+					<property name="supportedMediaTypes">  
+			            <list>  
+			                <value>application/json;charset=UTF-8</value>  
+			                <value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->  
+			            </list>  
+			        </property> 
+					<property name="features">
+						<array>
+							<value>WriteMapNullValue</value>
+							<value>WriteNullStringAsEmpty</value>
+						</array>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 视图文件解析配置，如果只使用json，这个基本用不上，先放着吧 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="${web.view.prefix}" />
-		<property name="suffix" value="${web.view.suffix}" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
 	</bean>
-
-	<!-- 上传文件拦截，设置最大上传文件大小 10M=10*1024*1024(B)=10485760 bytes -->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="${web.maxUploadSize}" />
-	</bean>
-
-	<!-- json返回转换配置 -->
-	<mvc:annotation-driven>
-		<mvc:message-converters register-defaults="true">
-			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-				<property name="supportedMediaTypes">  
-		            <list>  
-		                <value>application/json;charset=UTF-8</value>  
-		                <value>text/html;charset=UTF-8</value><!-- 避免IE出现下载JSON文件的情况 -->  
-		            </list>  
-		        </property> 
-				<property name="features">
-					<array>
-						<value>WriteMapNullValue</value>
-						<value>WriteNullStringAsEmpty</value>
-					</array>
-				</property>
-			</bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
-
-
 </beans>

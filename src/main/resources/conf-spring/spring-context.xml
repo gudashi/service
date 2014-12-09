@@ -8,9 +8,7 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
-	default-lazy-init="true">
-	
-	<description>Spring Configuration</description>
+		>
 	
 	<!-- 加载配置文件 -->
 	<context:property-placeholder ignore-unresolvable="true" location="classpath*:/gudashi.properties"/>
@@ -19,106 +17,8 @@
 	<context:component-scan base-package="com.gudashi.service">
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-	
-	<!-- development 环境 -->
-	<beans profile="development">
-		<!-- 数据源配置，使用druid数据连接池 -->
-		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-			<property name="driverClassName" value="${jdbc.driver}"/>
-			<!-- 基本属性 url、user、password -->
-			<property name="url" value="${jdbc.url}" />
-			<property name="username" value="${jdbc.username}" />
-			<property name="password" value="${jdbc.password}" />
-			
-			<!-- 配置初始化大小、最小、最大 -->
-			<property name="initialSize" value="${jdbc.pool.minIdle}" />
-			<property name="minIdle" value="${jdbc.pool.minIdle}" /> 
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			
-			<!-- 配置获取连接等待超时的时间 -->
-			<property name="maxWait" value="60000" />
-			
-			<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-			<property name="timeBetweenEvictionRunsMillis" value="60000" />
-			
-			<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-			<property name="minEvictableIdleTimeMillis" value="300000" />
-			
-			<property name="validationQuery" value="SELECT 'x'" />
-			<property name="testWhileIdle" value="true" />
-			<property name="testOnBorrow" value="false" />
-			<property name="testOnReturn" value="false" />
-			
-			<!-- 配置监控统计拦截的filters -->
-		    <property name="filters" value="stat" /> 
-		</bean>
-	</beans>
-	
-	<!-- demonstration 环境 -->
-	<beans profile="demonstration">
-		<!-- 数据源配置，使用druid数据连接池 -->
-		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-			<property name="driverClassName" value="${jdbc.driver}"/>
-			<!-- 基本属性 url、user、password -->
-			<property name="url" value="${jdbc_url}" />
-			<property name="username" value="${jdbc_username}" />
-			<property name="password" value="${jdbc_password}" />
-			
-			<!-- 配置初始化大小、最小、最大 -->
-			<property name="initialSize" value="${jdbc.pool.minIdle}" />
-			<property name="minIdle" value="${jdbc.pool.minIdle}" /> 
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			
-			<!-- 配置获取连接等待超时的时间 -->
-			<property name="maxWait" value="60000" />
-			
-			<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-			<property name="timeBetweenEvictionRunsMillis" value="60000" />
-			
-			<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-			<property name="minEvictableIdleTimeMillis" value="300000" />
-			
-			<property name="validationQuery" value="SELECT 'x'" />
-			<property name="testWhileIdle" value="true" />
-			<property name="testOnBorrow" value="false" />
-			<property name="testOnReturn" value="false" />
-			
-			<!-- 配置监控统计拦截的filters -->
-		    <property name="filters" value="stat" /> 
-		</bean>
-	</beans>
-	
-	<!-- mopaas 环境 -->
-	<beans profile="mopaas">
-		<!-- 数据源配置，使用druid数据连接池 -->
-		<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-			<property name="driverClassName" value="${jdbc.driver}"/>
-			<!-- 基本属性 url、user、password -->
-			<property name="url" value="jdbc:mysql://${MOPAAS_MYSQL16932_HOST}:${MOPAAS_MYSQL16932_PORT}/${MOPAAS_MYSQL16932_NAME}?useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true" />
-			<property name="username" value="${MOPAAS_MYSQL16932_USERNAME}" />
-			<property name="password" value="${MOPAAS_MYSQL16932_PASSWORD}" />
-			
-			<!-- 配置初始化大小、最小、最大 -->
-			<property name="initialSize" value="${jdbc.pool.minIdle}" />
-			<property name="minIdle" value="${jdbc.pool.minIdle}" /> 
-			<property name="maxActive" value="${jdbc.pool.maxActive}" />
-			
-			<!-- 配置获取连接等待超时的时间 -->
-			<property name="maxWait" value="60000" />
-			
-			<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
-			<property name="timeBetweenEvictionRunsMillis" value="60000" />
-			
-			<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-			<property name="minEvictableIdleTimeMillis" value="300000" />
-			
-			<property name="validationQuery" value="SELECT 'x'" />
-			<property name="testWhileIdle" value="true" />
-			<property name="testOnBorrow" value="false" />
-			<property name="testOnReturn" value="false" />
-			
-			<!-- 配置监控统计拦截的filters -->
-		    <property name="filters" value="stat" /> 
-		</bean>
-	</beans>
+
+	<import resource="spring-context-dev.xml" />
+	<import resource="spring-context-demo.xml" />
+	<import resource="spring-context-mopaas.xml" />
 </beans>

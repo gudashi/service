@@ -24,7 +24,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping(value = "/{name}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{name}.xhtml", method = RequestMethod.GET)
 	public String welcomeName(@PathVariable String name, ModelMap model) {
 		
 	    model.addAttribute("message", "Welcome " + name);

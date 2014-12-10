@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gudashi.service.entity.User;
+import com.gudashi.service.entity.User2;
 import com.gudashi.service.service.UserService;
 
 @Controller
@@ -34,9 +35,17 @@ public class UserController {
 		return VIEW_INDEX;
 
 	}
-	
-	@RequestMapping(value = "/{id}.json", method = RequestMethod.GET)
-	public @ResponseBody User getUser(@PathVariable long id) {		
-		return userService.getUserById(id);
+
+	@RequestMapping(method=RequestMethod.GET, value = "/{id}.json")
+	@ResponseBody
+	public User2 getById(@PathVariable String id) {		
+		return userService.getById(id);
+	}
+
+	@RequestMapping(method=RequestMethod.POST, value = "/register.json")
+	@ResponseBody
+	public User2 register(@RequestBody User2 user){
+		userService.register(user);
+		return user;
 	}
 }

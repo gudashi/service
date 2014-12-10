@@ -21,4 +21,7 @@
 	<import resource="spring-context-dev.xml" />
 	<import resource="spring-context-demo.xml" />
 	<import resource="spring-context-mopaas.xml" />
+	<import resource="spring-context-sae.xml" />
+
+	<import resource="spring-context-mybatis.xml" />
 </beans>

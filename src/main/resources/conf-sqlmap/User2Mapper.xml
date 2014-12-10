@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gudashi.service.dao.User2Maper">
+	<resultMap id="BaseResultMap" type="com.gudashi.service.entity.User2">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, name
+	</sql>
+
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="com.gudashi.service.entity.User2">
+		insert into user (<include refid="Base_Column_List" />)
+		values(
+			#{id},
+			#{name}
+		)
+	</insert>
+</mapper>

@@ -7,11 +7,11 @@
 	<!-- 加载Spring配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:conf-spring/spring-context*.xml</param-value>
+		<param-value>classpath:conf-spring/spring-context.xml</param-value>
 	</context-param>
 	<context-param>
 		<param-name>spring.profiles.default</param-name>
-		<param-value>mopaas</param-value>
+		<param-value>sae</param-value>
 	</context-param>
 
 	<listener>

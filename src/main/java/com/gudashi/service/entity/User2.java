@@ -1,6 +1,12 @@
 package com.gudashi.service.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity @Table(name="user")
 public class User2 {
+	@Id
 	private String id;
 	private String name;
 
